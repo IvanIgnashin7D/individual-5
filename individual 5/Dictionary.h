@@ -27,9 +27,30 @@ public:
 			length_ += 1;
 			return;
 		}
-		last_->next_ = new_node;
+		if (first_->key_ > key) {
+			new_node->next_ = first_;
+			first_ = new_node;
+			length_ += 1;
+			return;
+		}
+		node = first_;
+		while (node != last_ && node->next_->key_ < key) node = node->next_;
+		new_node->next_ = node->next_;
+		node->next_ = new_node;
 		last_ = new_node;
 		length_ += 1;
+	}
+
+
+	void print() {
+		if (!length_) return;
+		Node* node = first_;
+		std::cout << '{';
+		while (node) {
+			std::cout << node->key_ << " : " << node->value_ << ", ";
+			node = node->next_;
+		}
+		std::cout << "}\n";
 	}
 	
 	
@@ -68,4 +89,25 @@ public:
 		}
 	}
 
+	void clear() {
+		if (!length_) return;
+		if (length_ == 1) {
+			delete first_;
+			length_ -= 1;
+			return;
+		}
+		Node* slow = first_;
+		Node* fast = slow->next_;
+		while (fast) {
+			delete slow;
+			length_ -= 1;
+			slow = fast;
+			fast = fast->next_;
+		}
+		delete slow;
+		length_ -= 1;
+	}
+
+	template<typename Type>
+	friend Dictionary<Type>* getIntersection(Dictionary<Type>* d2)
 };

@@ -28,16 +28,16 @@
 //		last_ = new_node;
 //	}
 //
-//	void print() {
-//		if (is_empty()) return;
-//		Node* node = first_;
-//		std::cout << '[';
-//		while (node) {
-//			std::cout << node->value_ << ", ";
-//			node = node->next_;
-//		}
-//		std::cout << "]\n";
-//	}
+	//void print() {
+	//	if (is_empty()) return;
+	//	Node* node = first_;
+	//	std::cout << '[';
+	//	while (node) {
+	//		std::cout << node->value_ << ", ";
+	//		node = node->next_;
+	//	}
+	//	std::cout << "]\n";
+	//}
 //
 //	Node* find(std::string value) {
 //		if (is_empty()) return nullptr;
@@ -127,14 +127,30 @@
 
 #include "Dictionary.h"
 
+
+template<typename Type>
+Dictionary<Type>* getIntersection(Dictionary<Type>* d2) {
+
+}
+
+
 int main() {
-	Dictionary<int> dict;
+	Dictionary<int> dict1;
 
-	dict.insertItem(2, 20);
-	std::cout << dict.length_ << '\n';
+	dict1.insertItem(2, 20);
+	dict1.insertItem(5, 50);
+	dict1.insertItem(4, 40);
+	dict1.insertItem(1, 10);
+	dict1.insertItem(3, 30);
+	dict1.print();
+	std::cout << dict1.searchItem(3)->value_ << '\n';
+	dict1.deleteItem(3);
+	dict1.print();
+	dict1.clear();
+	dict1.print();
+	// В итоге в словаре dict: 1, 2, 4, 5
 
-	dict.insertItem(3, 30);
-	dict.deleteItem(2);
-	std::cout << dict.length_ << '\n';
-
+	Dictionary<int> dict2;
+	dict2.insertItem(2, 20);
+	dict2.insertItem(4, 40);
 }

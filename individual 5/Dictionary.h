@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-//#include "main.cpp"
 template<typename Type>
 class Dictionary {
 public:
@@ -20,7 +19,10 @@ public:
 	
 	void insertItem(Type key, Type value) {
 		Node* node = searchItem(key);
-		if (node != nullptr && node->key_ == key) return;
+		if (node != nullptr && node->key_ == key) {
+			std::cout << "There is already item with that key.\n";
+			return;
+		}
 		Node* new_node = new Node(key, value);
 		if (!length_) {
 			first_ = new_node;
@@ -44,7 +46,10 @@ public:
 
 
 	void print() {
-		if (!length_) return;
+		if (!length_) {
+			std::cout << "The dictionary is empty.\n";
+			return;
+		}
 		Node* node = first_;
 		std::cout << '{';
 		while (node) {
@@ -66,7 +71,10 @@ public:
 
 
 	void deleteItem(Type key) {
-		if (!length_) return;
+		if (!length_) {
+			std::cout << "The dictionary is empty.\n";
+			return;
+		}
 		if (first_->key_ == key) {
 			delete first_;
 			length_ -= 1;
@@ -87,11 +95,16 @@ public:
 			slow->next_ = fast->next_;
 			delete fast;
 			length_ -= 1;
+			return;
 		}
+		std::cout << "There is no item with this key.\n";
 	}
 
 	void clear() {
-		if (!length_) return;
+		if (!length_) {
+			std::cout << "The dictionary is empty.\n";
+			return;
+		}
 		if (length_ == 1) {
 			delete first_;
 			length_ -= 1;
@@ -109,7 +122,8 @@ public:
 		length_ -= 1;
 	}
 
-	friend Dictionary<Type>* getIntersection(Dictionary<Type>* d1, Dictionary<Type>* d2);
+	template <typename Type>
+    friend Dictionary<Type>* getIntersection(Dictionary<Type>* d1, Dictionary<Type>* d2);
 };
 
 

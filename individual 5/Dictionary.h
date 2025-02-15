@@ -109,5 +109,24 @@ public:
 		length_ -= 1;
 	}
 
-	friend Dictionary<Type>* getIntersection(Dictionary<Type> d1, Dictionary<Type> d2);
+	friend Dictionary<Type>* getIntersection(Dictionary<Type>* d1, Dictionary<Type>* d2);
 };
+
+
+template <typename Type>
+Dictionary<Type>* getIntersection(Dictionary<Type>* d1, Dictionary<Type>* d2) {
+    Dictionary<Type>* dict3 = new Dictionary<Type>();
+    typename Dictionary<Type>::Node* node1 = d1->first_;
+    while (node1) {
+        typename Dictionary<Type>::Node* node2 = d2->first_;
+        while (node2) {
+            if (node1->key_ == node2->key_ && node1->value_ == node2->value_) {
+                dict3->insertItem(node1->key_, node1->value_);
+                break;
+            }
+            node2 = node2->next_;
+        }
+        node1 = node1->next_;
+    }
+    return dict3;
+}

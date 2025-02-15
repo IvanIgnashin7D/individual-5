@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-template<class Type>
+//#include "main.cpp"
+template<typename Type>
 class Dictionary {
 public:
 	struct Node {
@@ -108,6 +109,5 @@ public:
 		length_ -= 1;
 	}
 
-	template<typename Type>
-	friend Dictionary<Type>* getIntersection(Dictionary<Type>* d2)
+	friend Dictionary<Type>* getIntersection(Dictionary<Type> d1, Dictionary<Type> d2);
 };
